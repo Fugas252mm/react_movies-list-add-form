@@ -25,8 +25,8 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
   const [imdbUrl, setImdbUrl] = useState('');
   const [imdbId, setImdbId] = useState('');
 
-  const hasError = !title || !imgUrl || !imdbUrl || !imdbId;
-
+  const [touched, setTouched] = useState(false);
+  const hasError: boolean = !title || !imgUrl || !imdbUrl || !imdbId;
   const reset = () => {
     setTitle('');
     setDescription('');
@@ -36,8 +36,12 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
     setCount(count + 1);
   };
 
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+  };
+
   return (
-    <form className="NewMovie" key={count}>
+    <form className="NewMovie" key={count} onSubmit={handleSubmit}>
       <h2 className="title">Add a movie</h2>
 
       <TextField
@@ -46,6 +50,9 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
         value={title}
         onChange={setTitle}
         required
+        touched={touched}
+        setTouched={setTouched}
+        hasError={hasError}
       />
 
       <TextField
@@ -53,6 +60,9 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
         label="Description"
         value={description}
         onChange={setDescription}
+        touched={touched}
+        setTouched={setTouched}
+        hasError={hasError}
       />
 
       <TextField
@@ -61,6 +71,9 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
         value={imgUrl}
         onChange={setImgUrl}
         required
+        touched={touched}
+        setTouched={setTouched}
+        hasError={hasError}
       />
 
       <TextField
@@ -69,6 +82,9 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
         value={imdbUrl}
         onChange={setImdbUrl}
         required
+        touched={touched}
+        setTouched={setTouched}
+        hasError={hasError}
       />
 
       <TextField
@@ -77,6 +93,9 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
         value={imdbId}
         onChange={setImdbId}
         required
+        touched={touched}
+        setTouched={setTouched}
+        hasError={hasError}
       />
 
       <div className="field is-grouped">
